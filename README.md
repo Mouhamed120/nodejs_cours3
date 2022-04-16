@@ -1,2 +1,9 @@
-# nodejs_cours3
-Created with CodeSandbox
+# Example
+
+To run this example:
+
+- `npm install` or `yarn`
+- `npm run dev` or `yarn dev`
+- `Mouhamed est beau`
+
+# Exemple 2
