@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const mongosse = require("mongoose");
-const userController = require("../controllers/userControllers");
-
-require("dotenv").config();
+const { getTodo, createTodo } = require("../controllers/todos");
+const Todos = require("../models/Todos");
 mongosse
   .connect(
     `mongodb+srv://ana:KyAx6OzFVzgSIto7@expressapi.bqunp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
   )
   .then(() => {
-    router.get("/", userController.getUser);
+    router.get("/", getTodo);
+    router.post("/", createTodo);
   })
   .catch((error) => {
     console.log(error.message);
