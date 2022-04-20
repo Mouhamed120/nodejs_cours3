@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongosse = require("mongoose");
-const { getTodo, createTodo } = require("../controllers/todos");
+const { getTodo, createTodo, deleteTodo } = require("../controllers/todos");
 const Todos = require("../models/Todos");
 mongosse
   .connect(
@@ -9,6 +9,7 @@ mongosse
   .then(() => {
     router.get("/", getTodo);
     router.post("/", createTodo);
+    router.delete("/:id", deleteTodo);
   })
   .catch((error) => {
     console.log(error.message);
