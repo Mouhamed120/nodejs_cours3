@@ -8,12 +8,13 @@ const {
   patchedTodo
 } = require("../controllers/todos");
 const { LoginUser, RegisterUser } = require("../controllers/userController");
+const { verification } = require("../middlewares/auth");
 mongosse
   .connect(
     `mongodb+srv://ana:KyAx6OzFVzgSIto7@expressapi.bqunp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
   )
   .then(() => {
-    router.get("/todos", getTodo);
+    router.get("/todos", verification, getTodo);
     router.post("/todos", createTodo);
     router.delete("/todos:id", deleteTodo);
     router.put("/todos:id", updateTodo);
