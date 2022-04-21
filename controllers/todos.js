@@ -10,6 +10,30 @@ const getTodo = async (req, res) => {
     console.log(error.message);
   }
 };
+
+const updateTodo = async (req, res) => {
+  // on trouve le todo à modifier par son id
+  const todo = await Todo.findById(req.params.id);
+  if (!todo) return res.status(404).send("Todo is not found");
+  const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+    new: true
+  });
+  res.send(updatedTodo);
+};
+const patchedTodo = async (req, res) => {
+  // on trouve le todo à modifier par son id
+  const todo = await Todo.findById(req.params.id);
+  if (!todo) return res.status(404).send("Todo is not found");
+  const updatedTodo = await Todo.findByIdAndUpdate(
+    req.params.id,
+    { isCompleted: !todo.isCompleted },
+    {
+      new: true
+    }
+  );
+  res.send(updatedTodo);
+};
+
 const deleteTodo = async (req, res) => {
   const todo = await Todo.findByIdAndDelete({ _id: req.params.id });
   if (!todo) return res.send("todo is not found");
@@ -27,4 +51,4 @@ const createTodo = async (req, res) => {
   }
 };
 
-module.exports = { getTodo, createTodo, deleteTodo };
+module.exports = { getTodo, createTodo, deleteTodo, updateTodo, patchedTodo };

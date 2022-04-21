@@ -5,7 +5,7 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/todos", api);
+app.use("/api", api);
 
 const port = "8080";
 app.listen(port, () => {
